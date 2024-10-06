@@ -138,6 +138,12 @@ const ProductDetailPage = () => {
             >
               Add to Cart
             </button>
+            <button
+              className="bg-blue-600 text-white py-2 px-4 rounded mr-4 hover:bg-blue-500"
+              // onClick={}
+            >
+              Add to Wishlist
+            </button>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function ProfileSlider({ menuOpen, toggleMenu }) {
   return (
     <div
-      className={`fixed top-0 right-0 w-[50vh] h-full border border-gray-950 p-4 bg-customgray shadow-lg z-50 transition-transform duration-500 ease-in-out
+      className={`fixed top-0 right-0 w-[50vh] h-full border border-gray-950 p-4 bg-customgray shadow-lg z-50 transition-transform duration-2000 ease-in-out
         ${menuOpen ? "translate-x-0" : "translate-x-full"}
       `}
     >

@@ -10,6 +10,8 @@ import { HiOutlineHome } from "react-icons/hi";
 import { LuPhoneCall } from "react-icons/lu";
 import { NavLink } from "react-router-dom";
 import { FaTv } from "react-icons/fa";
+import { GiLipstick } from "react-icons/gi";
+
 function Category() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -59,9 +61,9 @@ function Category() {
                         </a>
                       </li>
                       <li className="flex items-center py-2">
-                        <FaTv className="mr-2 " />
+                        <GiLipstick className="mr-2 " />
                         <a href="#" className="">
-                          Costmatics
+                          Cosmetics
                         </a>
                       </li>
                     </ul>

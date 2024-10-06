@@ -48,8 +48,17 @@ const products = [
   },
 ];
 function Cart() {
-  const storeProduct = localStorage.getItem(JSON.parse("propductsId"));
-  console.log("cart product id", storeProduct);
+  let cartId = localStorage.getItem("productIds");
+  console.log(cartId);
+
+  let cartProducts = products.filter((product) => cartId.includes(product.id));
+  console.log(cartProducts);
+
+  // function DeleteCart(id) {
+  //   console.log(id);
+  //   console.log("id");
+  // }
+
   return (
     <div className="CartSection flex flex-col items-center p-6">
       {/* Cart Header */}
@@ -58,40 +67,52 @@ function Cart() {
       </div>
 
       {/* Cart List Section */}
-      <div className="CartList w-full flex flex-col mt-6">
-        {/* Cart Item */}
-        <div className="cart-box flex items-center p-4 bg-white rounded-lg shadow-lg mb-4 hover:shadow-xl transition duration-300 ease-in-out">
-          {/* Product Image */}
-          <div className="image h-24 w-24 flex-shrink-0 mr-4">
-            <img
-              className="h-full w-full object-cover rounded-lg"
-              src="/ProductImage/product1.webp"
-              alt="Product"
-            />
-          </div>
 
-          {/* Product Description */}
-          <div className="description flex-grow">
-            <h4 className="text-lg font-semibold mb-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laudantium eos temporibus non.
-            </h4>
+      {cartProducts && cartProducts.length > 0 ? (
+        <>
+          {cartProducts.map((product) => (
+            <div
+              key={product.id}
+              className="CartList w-full flex flex-col mt-6"
+            >
+              {/* Cart Item */}
+              <div className="cart-box flex items-center p-4 bg-white rounded-lg shadow-lg mb-4 hover:shadow-xl transition duration-300 ease-in-out">
+                {/* Product Image */}
+                <div className="image h-24 w-24 flex-shrink-0 mr-4">
+                  <img
+                    className="h-full w-full object-cover rounded-lg"
+                    src={product.image}
+                    alt={product.name}
+                  />
+                </div>
 
-            <div className="price text-xl font-bold text-gray-900 ml-4 flex gap-4 items-center">
-              <span className="line-through text-gray-500">$30.00</span> $25.00
+                {/* Product Description */}
+                <div className="description flex-grow">
+                  <h4 className="text-lg font-semibold mb-2">{product.name}</h4>
+
+                  <div className="price text-xl font-bold text-gray-900 ml-4 flex gap-4 items-center">
+                    <span className="line-through text-gray-500">$30.00</span>
+                    {product.price}
+                  </div>
+                  <p className="text-sm text-gray-400">
+                    Delivery expected in upcoming <span>4 Days | Free</span>
+                  </p>
+                </div>
+
+                {/* Remove Item */}
+                <div
+                  className="RemoveItem cursor-pointer text-2xl"
+                  // onClick={() => DeleteCart(product.id)}
+                >
+                  <MdDelete />
+                </div>
+              </div>
             </div>
-            <p className="text-sm text-gray-400">
-              Delivery expected in upcoming <span>4 Days | Free</span>
-            </p>
-          </div>
-
-          {/* Remove Item */}
-          <div className="RemoveItem cursor-pointer text-2xl">
-            <MdDelete />
-          </div>
-        </div>
-      </div>
-
+          ))}
+        </>
+      ) : (
+        <div>Cart Data is Not found</div>
+      )}
       {/* Checkout Section */}
       <div className="CheckoutSection w-full bg-gray-100 p-6 rounded-lg shadow-lg mt-6">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">

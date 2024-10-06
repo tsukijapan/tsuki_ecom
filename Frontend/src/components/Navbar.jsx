@@ -13,6 +13,10 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  let NumberOfCartItems = localStorage.getItem("productIds");
+  let productarray = JSON.parse(NumberOfCartItems);
+  let length = productarray.length;
+
   return (
     <>
       <nav className="bg-customblue p-4">
@@ -50,13 +54,14 @@ const Navbar = () => {
               </NavLink>
               {/* Badge for dynamic changes */}
               <span className="absolute top-0 right-0 -mt-1 -mr-2 bg-white text-black text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                2
+                {length}{" "}
               </span>
             </div>
 
             {/* Heart Icon */}
-
-            <FaRegHeart className="text-2xl cursor-pointer" />
+            <NavLink to="/wishlist">
+              <FaRegHeart className="text-2xl cursor-pointer" />
+            </NavLink>
 
             {/* User Icon */}
             <LuUser2 className="text-2xl cursor-pointer" onClick={toggleMenu} />
@@ -64,7 +69,11 @@ const Navbar = () => {
         </div>
         {/* Conditionally render ProfileSlider */}
         {menuOpen && (
-          <ProfileSlider menuOpen={menuOpen} toggleMenu={toggleMenu} />
+          <ProfileSlider
+            menuOpen={menuOpen}
+            toggleMenu={toggleMenu}
+            className="transition-transform duration-2000 ease-in-out"
+          />
         )}
       </nav>
       <div>
