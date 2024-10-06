@@ -4,6 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { LuUser2 } from "react-icons/lu";
 import Category from "./Category";
 import ProfileSlider from "./ProfileSlider";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +27,7 @@ const Navbar = () => {
               />
             </div>
             <span className="ml-2 text-white text-2xl font-semibold">
-              TUSKI
+              TSUKI
             </span>
           </div>
 
@@ -43,7 +44,10 @@ const Navbar = () => {
           <div className="flex items-center space-x-6 text-white">
             {/* Cart Icon with Badge */}
             <div className="relative cursor-pointer">
-              <CgShoppingCart className="text-2xl bg-transparent" />
+              <NavLink to="/cart">
+                {" "}
+                <CgShoppingCart className="text-2xl bg-transparent" />
+              </NavLink>
               {/* Badge for dynamic changes */}
               <span className="absolute top-0 right-0 -mt-1 -mr-2 bg-white text-black text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 2
@@ -51,6 +55,7 @@ const Navbar = () => {
             </div>
 
             {/* Heart Icon */}
+
             <FaRegHeart className="text-2xl cursor-pointer" />
 
             {/* User Icon */}

@@ -58,6 +58,12 @@ function Category() {
                           Electronics
                         </a>
                       </li>
+                      <li className="flex items-center py-2">
+                        <FaTv className="mr-2 " />
+                        <a href="#" className="">
+                          Costmatics
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>

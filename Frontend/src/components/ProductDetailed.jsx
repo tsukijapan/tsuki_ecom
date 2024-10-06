@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 
 // Reuse the same products array (this can later be moved to a context or state management solution)
 const products = [
@@ -44,7 +44,7 @@ const products = [
       "TWS Digital Display Wireless Headset With Matching Silicone Case, TWS Headset, Gaming Headset, Low Latency High Quality Headset, Airpod Max, Cheap Headset, Clearance Items, Affordable Set, Headset Protective Case",
     name: "TWS Digital Display Wireless Headset",
     price: "$5.59",
-    rating: 4.0,
+    rating: 1.0,
     reviews: 356,
     label: "old",
   },
@@ -53,12 +53,33 @@ const products = [
 const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
 
+  const [productId, setProductId] = useState(() => {
+    const savedProductIds = localStorage.getItem("productIds");
+    return savedProductIds ? JSON.parse(savedProductIds) : [];
+  });
   const handleQuantityChange = (amount) => {
     setQuantity(quantity + amount > 0 ? quantity + amount : 1);
   };
   const { id } = useParams(); // Get the product ID from the URL
   const product = products.find((p) => p.id === parseInt(id)); // Find the product by ID
 
+  const cart = () => {
+    if (product && !productId.includes(product.id)) {
+      const updatedProductIds = [...productId, product.id];
+
+      // Step 2: Update the state with the new product ID
+      setProductId(updatedProductIds);
+
+      // Step 3: Store the updated product IDs in localStorage
+      localStorage.setItem("productIds", JSON.stringify(updatedProductIds));
+
+      // For debugging
+      console.log("Product added to cart:", product.id);
+      console.log("Updated product IDs in localStorage:", updatedProductIds);
+    } else {
+      console.log("Product already in cart or not found.");
+    }
+  };
   if (!product) {
     return <p>Product not found</p>;
   }
@@ -111,11 +132,11 @@ const ProductDetailPage = () => {
                 +
               </button>
             </div>
-            <button className="bg-orange-500 text-white py-2 px-4 rounded mr-4 hover:bg-orange-700">
+            <button
+              className="bg-orange-500 text-white py-2 px-4 rounded mr-4 hover:bg-orange-700"
+              onClick={cart}
+            >
               Add to Cart
-            </button>
-            <button className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
-              Buy Now
             </button>
           </div>
         </div>

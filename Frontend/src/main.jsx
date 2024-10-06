@@ -14,6 +14,7 @@ import Register from "./AuthPages/Register.jsx";
 
 import ProductDetailPage from "./components/ProductDetailed.jsx";
 import Home from "./Pages/Home/Home.jsx";
+import Cart from "./components/CartSection.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/product/:id", element: <ProductDetailPage /> },
+      { path: "/Cart", element: <Cart /> },
     ],
   },
 ]);
