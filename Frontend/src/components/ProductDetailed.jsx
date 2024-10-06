@@ -80,6 +80,23 @@ const ProductDetailPage = () => {
       console.log("Product already in cart or not found.");
     }
   };
+  const wishlist = () => {
+    if (product && !productId.includes(product.id)) {
+      const updatedProductIds = [...productId, product.id];
+
+      // Step 2: Update the state with the new product ID
+      setProductId(updatedProductIds);
+
+      // Step 3: Store the updated product IDs in localStorage
+      localStorage.setItem("productIds", JSON.stringify(updatedProductIds));
+
+      // For debugging
+      console.log("Product added to cart:", product.id);
+      console.log("Updated product IDs in localStorage:", updatedProductIds);
+    } else {
+      console.log("Product already in cart or not found.");
+    }
+  };
   if (!product) {
     return <p>Product not found</p>;
   }
@@ -140,7 +157,7 @@ const ProductDetailPage = () => {
             </button>
             <button
               className="bg-blue-600 text-white py-2 px-4 rounded mr-4 hover:bg-blue-500"
-              // onClick={}
+              onClick={wishlist}
             >
               Add to Wishlist
             </button>

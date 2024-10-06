@@ -4,27 +4,49 @@ const Wishlist = () => {
   const wishlistItems = [
     {
       id: 1,
-      name: "Product Name 1",
-      description: "Short description of product 1.",
-      price: "$29.99",
-      imageUrl: "https://via.placeholder.com/100",
+      image: "/ProductImage/product1.webp",
+      description:
+        "Pro 4K GPS Drone - 3 Big Batteries, Brushless Motor, Smart Obstacle Avoidance, GPS Home Return, Perfect for Adult Beginners, Ideal Gift for Friends and Family",
+      name: "Pro 4K GPS Drone -",
+      price: "$70",
+      rating: 4.5,
+      reviews: 738,
+      label: "HOT",
     },
     {
       id: 2,
-      name: "Product Name 2",
-      description: "Short description of product 2.",
-      price: "$49.99",
-      imageUrl: "https://via.placeholder.com/100",
+      image: "/ProductImage/product2.png",
+      description:
+        "256GB Dual SIM U24 Ultra Android Phone - 6.8'' Full HD Display, Built-In Pen, Unlocked for Worldwide Use - High-Performance Mobile with Advanced Camera and Long-Lasting Battery",
+      name: "Samsung Electronics Samsung Galaxy S21 5G",
+      price: "$2300",
+      rating: 4.6,
+      reviews: 536,
+      label: "BEST DEALS",
+    },
+    {
+      id: 3,
+      image: "/ProductImage/product3.webp",
+      name: "SENBONO Smart Glasses",
+      description:
+        "SENBONO Smart Glasses - Advanced Blue Light Filter & Polarized Vision - Seamless Audio, Built-in Mic & Speakers - AI Voice Assistant, Touch Control - 5hr Battery Life - Perfect Rectangle/Large Style Gift for Birthday, Easter, Presidents Day, Boyfriends & Girlfriends",
+      price: "$27.48",
+      rating: 5,
+      reviews: 423,
+      label: "BEST DEALS",
+    },
+    {
+      id: 4,
+      image: "/ProductImage/product4.webp",
+      description:
+        "TWS Digital Display Wireless Headset With Matching Silicone Case, TWS Headset, Gaming Headset, Low Latency High Quality Headset, Airpod Max, Cheap Headset, Clearance Items, Affordable Set, Headset Protective Case",
+      name: "TWS Digital Display Wireless Headset",
+      price: "$5.59",
+      rating: 1.0,
+      reviews: 356,
+      label: "old",
     },
   ];
-
-  //   const handleRemove = (id) => {
-  //     console.log(Remove item with id: ${id});
-  //   };
-
-  //   const handleEdit = (id) => {
-  //     console.log(Edit item with id: ${id});
-  //   };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -44,19 +66,19 @@ const Wishlist = () => {
                 className="flex items-center justify-between p-4 border-b border-gray-300"
               >
                 <img
-                  src={item.imageUrl}
+                  src={item.image}
                   alt="Product"
                   className="w-24 h-auto rounded-md"
                 />
                 <div className="item-details flex-1 ml-4">
                   <h3 className="text-lg font-medium">{item.name}</h3>
-                  <p className="text-gray-600">{item.description}</p>
+
                   <p className="text-orange-500 font-bold">{item.price}</p>
                 </div>
 
                 <button
                   className="ml-4 bg-red-500 text-white py-2 px-4 rounded-md transition duration-300 hover:bg-red-700"
-                  onClick={() => handleRemove(item.id)}
+                  // onClick={() => handleRemove(item.id)}
                 >
                   Remove
                 </button>
