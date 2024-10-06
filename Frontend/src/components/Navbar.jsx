@@ -14,8 +14,14 @@ const Navbar = () => {
   };
 
   let NumberOfCartItems = localStorage.getItem("productIds");
-  let productarray = JSON.parse(NumberOfCartItems);
-  let length = productarray.length;
+  let length;
+  if (NumberOfCartItems) {
+    // NumberOfCartItems;
+    let productarray = JSON.parse(NumberOfCartItems);
+    length = productarray.length;
+  } else {
+    length = 0;
+  }
 
   return (
     <>
@@ -54,7 +60,7 @@ const Navbar = () => {
               </NavLink>
               {/* Badge for dynamic changes */}
               <span className="absolute top-0 right-0 -mt-1 -mr-2 bg-white text-black text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {length}{" "}
+                {length}
               </span>
             </div>
 

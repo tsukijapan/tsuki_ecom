@@ -74,10 +74,10 @@ const ProductDetailPage = () => {
       localStorage.setItem("productIds", JSON.stringify(updatedProductIds));
 
       // For debugging
-      console.log("Product added to cart:", product.id);
+      alert("Product added to cart:", product.id);
       console.log("Updated product IDs in localStorage:", updatedProductIds);
     } else {
-      console.log("Product already in cart or not found.");
+      alert("Product already in cart or not found.");
     }
   };
   const wishlist = () => {
@@ -157,7 +157,7 @@ const ProductDetailPage = () => {
             </button>
             <button
               className="bg-blue-600 text-white py-2 px-4 rounded mr-4 hover:bg-blue-500"
-              onClick={wishlist}
+              onClick={() => alert(" Feature is Disabled")}
             >
               Add to Wishlist
             </button>

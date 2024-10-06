@@ -49,15 +49,13 @@ const products = [
 ];
 function Cart() {
   let cartId = localStorage.getItem("productIds");
-  console.log(cartId);
-
+  if (cartId) {
+    console.log(cartId);
+  }
   let cartProducts = products.filter((product) => cartId.includes(product.id));
-  console.log(cartProducts);
-
-  // function DeleteCart(id) {
-  //   console.log(id);
-  //   console.log("id");
-  // }
+  function DeleteCart() {
+    alert("Feature is Disabled");
+  }
 
   return (
     <div className="CartSection flex flex-col items-center p-6">
@@ -102,7 +100,7 @@ function Cart() {
                 {/* Remove Item */}
                 <div
                   className="RemoveItem cursor-pointer text-2xl"
-                  // onClick={() => DeleteCart(product.id)}
+                  onClick={() => DeleteCart()}
                 >
                   <MdDelete />
                 </div>
