@@ -78,7 +78,7 @@ const Wishlist = () => {
 
                 <button
                   className="ml-4 bg-red-500 text-white py-2 px-4 rounded-md transition duration-300 hover:bg-red-700"
-                  // onClick={() => handleRemove(item.id)}
+                  onClick={() => alert("Feautre is disabled")}
                 >
                   Remove
                 </button>
