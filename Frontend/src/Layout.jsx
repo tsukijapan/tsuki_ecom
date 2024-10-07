@@ -4,14 +4,22 @@ import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
 import FooterWithoutLink from "./components/Footer";
 import { useNavigate } from "react-router-dom";
+import { CirclesWithBar } from "react-loader-spinner";
 function Layout() {
   const navigate = useNavigate();
+  const [load, setload] = useState(false);
 
   return (
     <>
-      <Navbar />
-      <Outlet />
-      <FooterWithoutLink />
+      {load ? (
+        <CirclesWithBar />
+      ) : (
+        <>
+          <Navbar />
+          <Outlet />
+          <FooterWithoutLink />
+        </>
+      )}
     </>
   );
 }

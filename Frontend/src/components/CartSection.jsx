@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 
 const products = [
@@ -53,8 +53,17 @@ function Cart() {
     console.log(cartId);
   }
   let cartProducts = products.filter((product) => cartId.includes(product.id));
-  function DeleteCart() {
-    alert("Feature is Disabled");
+  function DeleteCart(id) {
+    let productsId = JSON.parse(localStorage.getItem("productIds")) || [];
+
+    let removeid = id;
+
+    productsId = productsId.filter((id) => id !== removeid);
+
+    // Save the updated array back to local storage
+    localStorage.setItem("productIds", JSON.stringify(productsId));
+
+    alert("Prduct is deleted");
   }
 
   return (
@@ -100,7 +109,7 @@ function Cart() {
                 {/* Remove Item */}
                 <div
                   className="RemoveItem cursor-pointer text-2xl"
-                  onClick={() => DeleteCart()}
+                  onClick={() => DeleteCart(product.id)}
                 >
                   <MdDelete />
                 </div>
