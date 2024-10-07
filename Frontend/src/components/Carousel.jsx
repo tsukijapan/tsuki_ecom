@@ -26,7 +26,7 @@ const Carousel = () => {
                   Starting at $999.00
                 </p>
                 <h1 className="text-4xl font-bold mb-4">
-                  The best notebook collection 2023
+                  The best notebook collection 2024
                 </h1>
                 <p className="text-xl mb-6">
                   Exclusive offer -10% off this week
