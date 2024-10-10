@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-customblue p-4">
-        <div className="container mx-auto flex items-center justify-around">
+        <div className="container mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
             <div className="rounded-full h-12 w-12 overflow-hidden">
