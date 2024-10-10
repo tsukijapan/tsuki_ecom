@@ -41,15 +41,6 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Search Bar */}
-          <div className="w-full max-w-lg mx-4">
-            <input
-              type="text"
-              placeholder="Search for anything..."
-              className="w-full py-2 px-4 rounded-lg shadow-sm focus:outline-none"
-            />
-          </div>
-
           {/* Icons */}
           <div className="flex items-center space-x-6 text-white">
             {/* Cart Icon with Badge */}
