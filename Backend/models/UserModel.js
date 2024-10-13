@@ -1,20 +1,12 @@
 const mongoose = require("mongoose");
-
-require("dotenv").config();
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => {
-    console.log("Mongoose is connected");
-  })
-  .catch((err) => {
-    console.log("Mongoose Connection is Failed");
-  });
-
-const UserSchema = new mongoose.Schema({
-  Name: String,
-  Email: String,
-  Password: String,
+mongoose.connect("mongodb://localhost:27017/tsuki").then(() => {
+  console.log("Mongodb is connected");
 });
 
-const User = mongoose.model("user", UserSchema);
-module.exports = User;
+const userSchema = mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+});
+
+module.exports = mongoose.model("user", userSchema);
