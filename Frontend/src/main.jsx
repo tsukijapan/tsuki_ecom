@@ -14,6 +14,9 @@ import Register from "./AuthPages/Register.jsx";
 
 import ProductDetailPage from "./components/ProductDetailed.jsx";
 import Home from "./Pages/Home/Home.jsx";
+import Cart from "./components/CartSection.jsx";
+import Wishlist from "./components/Wishlist.jsx";
+import CustomerSupport from "./components/CustomerSupport.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -37,6 +40,9 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/product/:id", element: <ProductDetailPage /> },
+      { path: "/Cart", element: <Cart /> },
+      { path: "/wishlist", element: <Wishlist /> },
+      { path: "/customer", element: <CustomerSupport /> },
     ],
   },
 ]);
