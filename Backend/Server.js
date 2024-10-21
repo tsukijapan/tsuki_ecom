@@ -1,63 +1,71 @@
 const express = require("express");
-const app = express();
 require("dotenv").config();
-let secretKey = process.env.SECRET_KEY;
-// UserModel Import
-const User = require("./models/UserModel");
-
-// it is used to enable the parsing request
-app.use(express.json());
-// Import JsonWebtoken
 const jwt = require("jsonwebtoken");
-app.get("/", (req, res) => {});
 
-// Signup route
-app.post("/signup", async (req, res) => {
+// Model
+const UserModel = require("./models/UserModel");
+
+const app = express();
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hey Kanav");
+});
+
+// Register
+app.post("/register", async (req, res) => {
   try {
-    let { Name, Email, Password } = req.body;
-    let user = await User.findOne({ Email });
-
-    if (!user) {
-      let createUser = await User.create({
-        Name,
-        Email,
-        Password,
+    const { username, email, password } = req.body;
+    console.log(username, email, "and", password);
+    let user = await UserModel.findOne({ email });
+    if (user) {
+      return res
+        .status(202)
+        .json({ message: "User is already registered Please Login" });
+    } else {
+      let newuser = await UserModel.create({
+        username,
+        email,
+        password,
       });
-      let token = jwt.sign({ Email }, secretKey);
 
-      if (token) {
-        res
-          .status(202)
-          .json({ message: "User is Successfully Registered", token });
-      }
-    } else {
-      console.log("Email is already registered");
-      res.status(404).json({ message: "Email is already Registered" });
+      let token = jwt.sign({ email }, "shiva");
+      res.cookie("token", token);
+
+      return res.status(200).json({ message: "Signup Successfully", token });
     }
   } catch (error) {
-    console.log(error);
-    res.status(404).json({ message: "Failed at the time of Signup" });
+    console.log("Failed to Register", error);
   }
 });
 
-// Login Route
 app.post("/login", async (req, res) => {
-  let { Email, Password } = req.body;
-
   try {
-    let user = await User.findOne({ Email, Password });
-    console.log(user);
+    const { email, password } = req.body;
+    let user = await UserModel.findOne({ email });
     if (!user) {
-      return res.json({ message: "Email is not registered please register" });
+      return res.status(400).json({ message: "User Not Found" });
     } else {
-      let token = jwt.sign({ Email }, secretKey);
-      return res.json({ message: "Login Successfully", token });
+      if (user.password != password) {
+        return res.json({ message: "Incorrect Passord" });
+      }
+      let token = jwt.sign({ email: email, userid: user._id }, "shiva");
+      res.cookie("token", token);
+
+      return res.json({ message: "Login Successfully", token, email });
     }
   } catch (error) {
-    return res.status(404).json({ message: "Failed to login" });
+    return res.status(404).json({ message: error });
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on ${process.env.PORT}`);
+app.get("/message", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+app.listen(8080, () => {
+  console.log(`Server is running on port 8080`);
 });

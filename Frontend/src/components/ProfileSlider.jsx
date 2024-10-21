@@ -6,8 +6,8 @@ import { NavLink } from "react-router-dom";
    const navigate = useNavigate();
    return (
      <div
-       className={`fixed top-0 right-0 w-[50vh] h-full border border-gray-950 p-4 bg-customgray shadow-lg z-50 transition-transform duration-2000 ease-in-out
-        ${menuOpen ? "translate-x-0" : "translate-x-full"}
+       className={`fixed top-0 right-0 w-[50vh] h-full border border-gray-950 p-4 bg-customwhite shadow-lg z-50 transition-transform duration-2000 ease-in-out 
+        ${menuOpen ? "translate-x-0" : "translate-x-full "}
       `}
      >
        {/* Cross symbol */}

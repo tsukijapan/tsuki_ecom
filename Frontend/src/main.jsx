@@ -17,6 +17,7 @@ import Home from "./Pages/Home/Home.jsx";
 import Cart from "./components/CartSection.jsx";
 import Wishlist from "./components/Wishlist.jsx";
 import CustomerSupport from "./components/CustomerSupport.jsx";
+import NeedHelp from "./components/NeedHelp.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: "/Cart", element: <Cart /> },
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/customer", element: <CustomerSupport /> },
+      { path: "/Needhelp", element: <NeedHelp /> },
     ],
   },
 ]);

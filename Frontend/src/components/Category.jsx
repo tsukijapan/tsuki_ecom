@@ -76,28 +76,58 @@ function Category() {
             </div>
 
             {/* Links */}
-            <NavLink className="flex items-center gap-1 justify-center">
-              <MdOutlineHome className="drop-shadow-md" />
-              Home
-            </NavLink>
-            <NavLink
-              to="/allproduct"
-              className="flex items-center gap-1 justify-center"
-            >
-              <MdProductionQuantityLimits className="drop-shadow-md" />
-              All Products
-            </NavLink>
-            <NavLink
-              to="/customer"
-              className="flex items-center gap-1 justify-center"
-            >
-              <AiOutlineCustomerService className="drop-shadow-md" />
-              Customer Support
-            </NavLink>
-            <NavLink to="/" className="flex items-center gap-1 justify-center">
-              <RiErrorWarningLine className="drop-shadow-md" />
-              Need Help
-            </NavLink>
+            <div>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-1 justify-center font-bold text-blue-500"
+                    : "flex items-center gap-1 justify-center"
+                }
+              >
+                <MdOutlineHome className="drop-shadow-md" />
+                Home
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/allproduct"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-1 justify-center font-bold text-blue-500"
+                    : "flex items-center gap-1 justify-center"
+                }
+              >
+                <MdProductionQuantityLimits className="drop-shadow-md" />
+                All Product
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/customer"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-1 justify-center font-bold text-blue-500"
+                    : "flex items-center gap-1 justify-center"
+                }
+              >
+                <AiOutlineCustomerService className="drop-shadow-md" />
+                Customer Support
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/NeedHelp"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-1 justify-center font-bold text-blue-500"
+                    : "flex items-center gap-1 justify-center"
+                }
+              >
+                <RiErrorWarningLine className="drop-shadow-md" />
+                Need Help
+              </NavLink>
+            </div>
           </div>
           <div className="number flex items-center">
             <LuPhoneCall className="drop-shadow-md" />
