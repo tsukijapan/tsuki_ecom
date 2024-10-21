@@ -104,7 +104,7 @@ function Category() {
             </div>
             <div>
               <NavLink
-                to="/ContactUs"
+                to="/customer"
                 className={({ isActive }) =>
                   isActive
                     ? "flex items-center gap-1 justify-center font-bold text-blue-500"
@@ -117,7 +117,7 @@ function Category() {
             </div>
             <div>
               <NavLink
-                to="/HelpPage"
+                to="/NeedHelp"
                 className={({ isActive }) =>
                   isActive
                     ? "flex items-center gap-1 justify-center font-bold text-blue-500"
