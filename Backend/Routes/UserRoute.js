@@ -1,11 +1,16 @@
 const express = require("express");
 const Router = express.Router();
-const jwt = require("jsonwebtoken");
-// model
+
+
+
+// userModel
 const UserModel = require("../models/UserModel");
+// JsonWebToken
+const jwt = require("jsonwebtoken");
+
 
 // UserRegisteration
-Router.post("/register", async (req, res) => {
+Router.post("/register", async(req,res) => {
   try {
     const { username, email, password, isAdmin } = req.body;
 
@@ -39,7 +44,7 @@ Router.post("/register", async (req, res) => {
   }
 });
 
-Router.post("/login", async (req, res) => {
+Router.post("/login",async  (req,res) => {
   try {
     const { email, password } = req.body;
     let user = await UserModel.findOne({ email });
