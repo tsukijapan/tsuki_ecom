@@ -1,29 +1,44 @@
 import React, { useState } from "react";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Login = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Replace with your API call logic
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/users/login",
+        {
+          email,
+          password,
+        }
+      );
 
-    const data = await response.json();
-    if (data.success) {
-      console.log("Login Successful");
-      // Handle successful login, e.g., store token, redirect, etc.
-    } else {
-      console.log("Login Failed");
-      // Handle login failure
+      const userData = response.data;
+
+      if (!userData.success) {
+        console.log(userData.message);
+        console.log("Login Failed");
+      }
+      console.log(userData);
+      const data = userData.token;
+      if (userData) {
+        console.log("hello");
+        console.log(data);
+        localStorage.setItem("token", userData.token);
+      }
+      console.log(userData.message);
+      console.log("Login Successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("An error occurred during Login:", error);
     }
+
+    setEmail("");
+    setPassword("");
   };
 
   return (
