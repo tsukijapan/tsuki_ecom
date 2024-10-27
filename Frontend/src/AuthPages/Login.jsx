@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Login = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,21 +20,17 @@ const Login = ({ toggleAuthMode }) => {
 
       const userData = response.data;
 
-      if (!userData.success) {
-        console.log(userData.message);
-        console.log("Login Failed");
+      if (!userData.token) {
+        toast.error("Login Failed");
+        console.log(" Login failed", userData.message);
+      } else {
+        toast.success("Login Successfull");
+
+        navigate("/");
+        console.log(" login Successfull", userData.message);
       }
-      console.log(userData);
-      const data = userData.token;
-      if (userData) {
-        console.log("hello");
-        console.log(data);
-        localStorage.setItem("token", userData.token);
-      }
-      console.log(userData.message);
-      console.log("Login Successfully");
-      navigate("/");
     } catch (error) {
+      toast.success(error);
       console.error("An error occurred during Login:", error);
     }
 

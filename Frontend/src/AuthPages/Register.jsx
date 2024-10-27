@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+import { useNavigate } from "react-router-dom";
 const Register = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
-
+  const navigate = useNavigate();
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -20,16 +23,16 @@ const Register = ({ toggleAuthMode }) => {
 
       const userData = response.data;
 
-      if (userData.success) {
-        alert(userData.message);
-        console.log("Registration Successful");
-        // Handle successful registration, e.g., redirect to login or home page
+      if (!userData.token) {
+        toast.error("Login Failed");
+        console.log(" registration failed", userData.message);
       } else {
-        alert(userData.message);
-        console.log("Registration Failed");
-        // Handle registration failure
+        toast.success("Login Successfull");
+        navigate("/");
+        console.log(" registration Successfull", userData.message);
       }
     } catch (error) {
+      toast.error(error);
       console.error("An error occurred during registration:", error);
     }
 
