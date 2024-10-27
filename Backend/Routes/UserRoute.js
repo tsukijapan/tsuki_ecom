@@ -1,14 +1,15 @@
 const express = require("express");
 const Router = express.Router();
 
-
+require("dotenv").config();
 
 // userModel
 const UserModel = require("../models/UserModel");
 // JsonWebToken
 const jwt = require("jsonwebtoken");
 
-
+// secret key
+const secretkey=
 // UserRegisteration
 Router.post("/register", async(req,res) => {
   try {
