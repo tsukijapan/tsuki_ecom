@@ -7,45 +7,80 @@ require("dotenv").config();
 const UserModel = require("../models/UserModel");
 // JsonWebToken
 const jwt = require("jsonwebtoken");
+const sendVerification = require("../middleware/Email.js");
 
 // secret key
-const secretkey=
-// UserRegisteration
-Router.post("/register", async(req,res) => {
+const secretkey =
+  // UserRegisteration
+  Router.post("/register", async (req, res) => {
+    try {
+      const { username, email, password, isAdmin } = req.body;
+
+      // Validate input
+      if (!username || !email || !password) {
+        return res.status(400).json({ error: "All fields are required" });
+      }
+
+      let user = await UserModel.findOne({ email });
+      if (user) {
+        return res
+          .status(202)
+          .json({ message: "User is already registered Please Login" });
+      }
+
+      let verficationCode = Math.floor(
+        100000 + Math.random() * 900000
+      ).toString();
+      let newuser = await UserModel.create({
+        username,
+        email,
+        password,
+        isAdmin: isAdmin || false,
+        verficationCode,
+      });
+
+      let token = jwt.sign({ email }, "shiva");
+      res.cookie("token", token);
+
+      sendVerification(email, verficationCode);
+
+      return res.status(200).json({ message: "Signup Successfully", token });
+    } catch (error) {
+      console.error("Registration Error:", error); // Log the error
+      res
+        .status(500)
+        .json({ error: "Server error in router post", details: error.message });
+    }
+  });
+
+// Verify Email
+Router.post("/verifyemail", async (req, res) => {
   try {
-    const { username, email, password, isAdmin } = req.body;
+    const { code } = req.body;
 
-    // Validate input
-    if (!username || !email || !password) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
-    let user = await UserModel.findOne({ email });
-    if (user) {
-      return res
-        .status(202)
-        .json({ message: "User is already registered Please Login" });
-    }
-    let newuser = await UserModel.create({
-      username,
-      email,
-      password,
-      isAdmin: isAdmin || false,
+    const user = await UserModel.findOne({
+      verficationCode: code,
     });
-
-    let token = jwt.sign({ email }, "shiva");
-    res.cookie("token", token);
-
-    return res.status(200).json({ message: "Signup Successfully", token });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or Expired Code" });
+    }
+    user.isVerified = true;
+    user.verficationCode = undefined;
+    await user.save();
+    return res
+      .status(400)
+      .json({ success: true, message: "Email is Verified" });
   } catch (error) {
-    console.error("Registration Error:", error); // Log the error
-    res
-      .status(500)
-      .json({ error: "Server error in router post", details: error.message });
+    return res
+      .status(400)
+      .json({ success: false, message: "Internal server Error" });
   }
 });
 
-Router.post("/login",async  (req,res) => {
+// Login Email
+Router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     let user = await UserModel.findOne({ email });
