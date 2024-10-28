@@ -1,0 +1,10 @@
+Tsuki Ecommerce Pending tasks
+
+Backend..
+
+1) Authentication ✅
+
+2) Verify User by Otp Through Mail  (processing)
+
+3) Admin Product Upload (Crud Operation) (processing)
+

@@ -1,35 +1,44 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
 const Register = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [username, setUserName] = useState("");
+  const navigate = useNavigate();
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      console.log("Passwords do not match");
-      return;
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/users/Register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+
+      const userData = response.data;
+
+      if (!userData.token) {
+        toast.error("Login Failed");
+        console.log(" registration failed", userData.message);
+      } else {
+        toast.success("Login Successfull");
+        navigate("/");
+        console.log(" registration Successfull", userData.message);
+      }
+    } catch (error) {
+      toast.error(error);
+      console.error("An error occurred during registration:", error);
     }
 
-    // Replace with your API call logic
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      console.log("Registration Successful");
-      // Handle successful registration
-    } else {
-      console.log("Registration Failed");
-      // Handle registration failure
-    }
+    setUserName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -39,6 +48,16 @@ const Register = ({ toggleAuthMode }) => {
           Register
         </h2>
         <form onSubmit={handleRegister}>
+          <div className="mb-4">
+            <label className="block text-gray-700">UserName</label>
+            <input
+              type="text"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+          </div>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
@@ -59,16 +78,7 @@ const Register = ({ toggleAuthMode }) => {
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
+
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"

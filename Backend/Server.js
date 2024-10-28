@@ -1,66 +1,19 @@
 const express = require("express");
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
-
-// Model
-const UserModel = require("./models/UserModel");
-
 const app = express();
 const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hey Kanav");
-});
+// Middleware
 
-// Register
-app.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    console.log(username, email, "and", password);
-    let user = await UserModel.findOne({ email });
-    if (user) {
-      return res
-        .status(202)
-        .json({ message: "User is already registered Please Login" });
-    } else {
-      let newuser = await UserModel.create({
-        username,
-        email,
-        password,
-      });
 
-      let token = jwt.sign({ email }, "shiva");
-      res.cookie("token", token);
+// Routes
+const UserRoute = require("./Routes/UserRoute");
 
-      return res.status(200).json({ message: "Signup Successfully", token });
-    }
-  } catch (error) {
-    console.log("Failed to Register", error);
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    let user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "User Not Found" });
-    } else {
-      if (user.password != password) {
-        return res.json({ message: "Incorrect Passord" });
-      }
-      let token = jwt.sign({ email: email, userid: user._id }, "shiva");
-      res.cookie("token", token);
-
-      return res.json({ message: "Login Successfully", token, email });
-    }
-  } catch (error) {
-    return res.status(404).json({ message: error });
-  }
-});
+// Routes
+app.use("/api/users", UserRoute);
 
 app.get("/message", (req, res) => {
   res.json({ message: "Hello from server!" });
