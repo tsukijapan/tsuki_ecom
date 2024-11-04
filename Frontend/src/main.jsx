@@ -20,6 +20,7 @@ import Cart from "./components/CartSection.jsx";
 import Wishlist from "./components/Wishlist.jsx";
 import CustomerSupport from "./components/CustomerSupport.jsx";
 import NeedHelp from "./components/NeedHelp.jsx";
+import OTPVerification from "./components/OtpVerification.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/customer", element: <CustomerSupport /> },
       { path: "/Needhelp", element: <NeedHelp /> },
+      { path: "/OtpVerify", element: <OTPVerification /> },
     ],
   },
 ]);
