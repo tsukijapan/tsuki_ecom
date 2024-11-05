@@ -74,7 +74,12 @@ const Login = ({ toggleAuthMode }) => {
         </form>
         <p className="mt-4 text-gray-600">
           Don't have an account?{" "}
-          <button className="text-blue-500 underline" onClick={toggleAuthMode}>
+          <button
+            className="text-blue-500 underline"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
             Register
           </button>
         </p>

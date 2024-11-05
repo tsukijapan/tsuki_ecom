@@ -57,21 +57,19 @@ const secretkey =
 Router.post("/verifyemail", async (req, res) => {
   try {
     const { code } = req.body;
-
-    const user = await UserModel.findOne({
-      verficationCode: code,
-    });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid or Expired Code" });
-    }
-    user.isVerified = true;
-    user.verficationCode = undefined;
-    await user.save();
-    return res
-      .status(400)
-      .json({ success: true, message: "Email is Verified" });
+   console.log(code);
+   const user = await UserModel.findOne({
+     verficationCode: code,
+   });
+   if (!user) {
+     return res
+       .status(400)
+       .json({ success: false, message: "Invalid or Expired Code" });
+   }
+   user.isVerified = true;
+   user.verficationCode = undefined;
+   await user.save();
+   return res.status(202).json({ success: true, message: "Email is Verified" });
   } catch (error) {
     return res
       .status(400)
