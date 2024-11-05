@@ -27,9 +27,9 @@ const Register = ({ toggleAuthMode }) => {
         toast.error("Login Failed");
         console.log(" registration failed", userData.message);
       } else {
-        toast.success("Login Successfull");
-        navigate("/");
-        console.log(" registration Successfull", userData.message);
+        toast.success("Please verify your otp");
+        navigate("/OtpVerify");
+        console.log("Please Verify Your Otp", userData.message);
       }
     } catch (error) {
       toast.error(error);
@@ -88,7 +88,12 @@ const Register = ({ toggleAuthMode }) => {
         </form>
         <p className="mt-4 text-gray-600">
           Already have an account?{" "}
-          <button className="text-blue-500 underline" onClick={toggleAuthMode}>
+          <button
+            className="text-blue-500 underline"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
             Login
           </button>
         </p>
