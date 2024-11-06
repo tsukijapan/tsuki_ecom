@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const sendVerification = require("../middleware/Email/Email.js");
 
 // secret key
-const secretkey =
+
   // UserRegisteration
   Router.post("/register", async (req, res) => {
     try {
