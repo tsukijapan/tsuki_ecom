@@ -12,10 +12,15 @@ app.use(express.json());
 // Routes
 const UserRoute = require("./Routes/UserRoute");
 const AddCartRouter = require("./Routes/AddCartRoute");
+const WishlistRouter = require("./Routes/AddWishlist");
 
 // Routes
 app.use("/api/users", UserRoute);
 app.use("/api/users", AddCartRouter);
+app.use("/api/users", WishlistRouter);
+
+
+
 app.get("/message", (req, res) => {
   res.json({ message: "Hello from server!" });
 });

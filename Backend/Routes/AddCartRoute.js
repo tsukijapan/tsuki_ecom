@@ -21,7 +21,9 @@ AddCartRouter.post("/addcart/:id", async (req, res) => {
 
     res.status(201).json({ message: "Product added to cart successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error adding product to cart", error });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error adding product to cart", error });
   }
 });
 
