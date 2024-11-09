@@ -58,7 +58,14 @@ const router = createBrowserRouter([
       { path: "/customer", element: <CustomerSupport /> },
       { path: "/Needhelp", element: <NeedHelp /> },
       { path: "/OtpVerify", element: <OTPVerification /> },
-      { path: "/logout", element: <Logout /> },
+      {
+        path: "/logout",
+        element: (
+          <ProtectedLayout>
+            <Logout />
+          </ProtectedLayout>
+        ),
+      },
     ],
   },
 ]);
