@@ -6,6 +6,7 @@ const Login = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -27,6 +28,7 @@ const Login = ({ toggleAuthMode }) => {
         toast.success("Login Successfull");
 
         navigate("/");
+        localStorage.setItem("token", userData.token);
         console.log(" login Successfull", userData.message);
       }
     } catch (error) {
