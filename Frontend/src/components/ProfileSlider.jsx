@@ -44,7 +44,7 @@ import { NavLink } from "react-router-dom";
        <div className="flex justify-center">
          <button
            className="absolute bottom-6 border border-black bg-gray-200 py-2 px-8 rounded-lg text-lg font-medium text-black hover:bg-black hover:text-white transition-all duration-300 ease-in-out"
-           onClick={() => navigate("/login")}
+           onClick={() => navigate("/logout")}
          >
            Logout
          </button>

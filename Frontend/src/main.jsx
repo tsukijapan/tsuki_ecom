@@ -21,7 +21,8 @@ import Wishlist from "./components/Wishlist.jsx";
 import CustomerSupport from "./components/CustomerSupport.jsx";
 import NeedHelp from "./components/NeedHelp.jsx";
 import OTPVerification from "./AuthPages/OtpVerification.jsx";
-
+import ProtectedLayout from "./middleware/ProtectedLayout.jsx";
+import Logout from "./AuthPages/Logout.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -45,11 +46,26 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/product/:id", element: <ProductDetailPage /> },
-      { path: "/Cart", element: <Cart /> },
+      {
+        path: "/Cart",
+        element: (
+          <ProtectedLayout>
+            <Cart />
+          </ProtectedLayout>
+        ),
+      },
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/customer", element: <CustomerSupport /> },
       { path: "/Needhelp", element: <NeedHelp /> },
       { path: "/OtpVerify", element: <OTPVerification /> },
+      {
+        path: "/logout",
+        element: (
+          <ProtectedLayout>
+            <Logout />
+          </ProtectedLayout>
+        ),
+      },
     ],
   },
 ]);
