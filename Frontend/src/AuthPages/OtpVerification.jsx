@@ -26,6 +26,7 @@ const OTPVerification = () => {
         return;
       }
       toast.success(userData.message);
+      localStorage.setItem("token", userData.token);
       navigate("/");
       console.log("User data:", userData);
     } catch (error) {
