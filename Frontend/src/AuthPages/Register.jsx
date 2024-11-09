@@ -23,13 +23,13 @@ const Register = ({ toggleAuthMode }) => {
 
       const userData = response.data;
 
-      if (!userData.token) {
-        toast.error("Login Failed");
-        console.log(" registration failed", userData.message);
-      } else {
+      if (userData.message) {
         toast.success("Please verify your otp");
         navigate("/OtpVerify");
         console.log("Please Verify Your Otp", userData.message);
+      } else {
+        toast.error(userData.error);
+        console.log(" registration failed", userData.error);
       }
     } catch (error) {
       toast.error(error);
